@@ -14,7 +14,7 @@ public:
                 int maxFreq = 0;
                 int minFreq = INT_MAX;
 
-                for(auto &it : freq) {
+                for(auto it : freq) {
                     maxFreq = max(maxFreq, it.second);
                     minFreq = min(minFreq, it.second);
                 }
