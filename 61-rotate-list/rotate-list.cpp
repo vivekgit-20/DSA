@@ -11,40 +11,36 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-
-          if (!head || !head->next || k == 0)
+        if (!head || !head->next || k == 0)
             return head;
 
-        // Initialize length and tail pointer
-        int length = 1;
+        // Find length and tail
+        int n = 1;
         ListNode* tail = head;
-
-        // Traverse to find the tail and length
         while (tail->next) {
             tail = tail->next;
-            length++;
+            n++;
         }
 
-        // Make it a circular linked list
+        k %= n;
+        if (k == 0) return head;
+
+        // Make it circular
         tail->next = head;
 
-        // Effective rotations needed
-        k = k % length;
-
-        // Traverse to the new tail (length - k - 1 steps from head)
-        int stepsToNewTail = length - k;
+        // Find new tail
+        int steps = n - k - 1;
         ListNode* newTail = head;
-        for (int i = 1; i < stepsToNewTail; i++) {
+        while (steps--) {
             newTail = newTail->next;
         }
 
-        // Set the new head
+        // New head
         ListNode* newHead = newTail->next;
 
         // Break the circle
-        newTail->next = NULL;
+        newTail->next = nullptr;
 
         return newHead;
     }
-      
 };
